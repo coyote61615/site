@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Instituto Dr. Gerlan Gurgel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde-logo: #8DA685;
+            --verde-escuro: #5e7059;
+            --grafite: #333333;
+            --cinza-fundo: #f0f0f0;
+            --branco: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--cinza-fundo); color: var(--grafite); }
+        
+        /* BARRA DE AVISOS (TICKER) */
+        .news-ticker { background: var(--grafite); color: white; padding: 10px; overflow: hidden; white-space: nowrap; }
+        .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; font-weight: bold; font-size: 14px; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* HEADER ESTILO PORTAL */
+        header { background: var(--branco); border-bottom: 4px solid var(--verde-logo); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header-inner { max-width: 1200px; margin: auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-area h1 { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--grafite); font-size: 1.8rem; line-height: 1; }
+        .logo-area span { color: var(--verde-logo); }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { text-decoration: none; color: var(--grafite); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: var(--verde-logo); }
+
+        /* HERO / DESTAQUE PRINCIPAL */
+        .hero-vlog {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop');
+            background-size: cover; background-position: center; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px;
+        }
+        .hero-content h2 { font-family: 'Oswald', sans-serif; font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .play-btn { background: var(--verde-logo); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; display: inline-block; margin-top: 20px; }
+        .play-btn:hover { background: var(--verde-escuro); transform: scale(1.05); }
+
+        /* LAYOUT DE CONTEÚDO (GRID) */
+        .main-container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; padding: 0 20px; }
+        
+        @media(max-width: 768px) { .main-container { grid-template-columns: 1fr; } }
+
+        /* POSTS / ARTIGOS */
+        .section-title { font-family: 'Oswald', sans-serif; font-size: 1.5rem; border-left: 5px solid var(--verde-logo); padding-left: 15px; margin-bottom: 20px; text-transform: uppercase; }
+        
+        .article-card { background: var(--branco); border-radius: 8px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.3s; }
+        .article-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .article-img { height: 250px; background-color: #ddd; background-size: cover; background-position: center; position: relative; }
+        .category-tag { position: absolute; top: 15px; left: 15px; background: var(--verde-logo); color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        
+        .article-body { padding: 25px; }
+        .article-body h3 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--grafite); }
+        .article-body p { color: #666; line-height: 1.6; margin-bottom: 15px; }
+        .read-more { color: var(--verde-logo); font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* SIDEBAR / LATERAL */
+        .sidebar-widget { background: var(--branco); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .profile-pic { width: 100px; height: 100px; background: #ccc; border-radius: 50%; margin: 0 auto 15px; display: block; border: 3px solid var(--verde-logo); }
+        .horario-box { background: #f9f9f9; border: 1px dashed var(--grafite); padding: 15px; margin-top: 15px; }
+        .contact-btn { display: block; width: 100%; padding: 12px; background: #25d366; color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 10px; }
+
+        /* FOOTER */
+        footer { background: var(--grafite); color: #aaa; padding: 40px 20px; text-align: center; margin-top: 50px; }
+        footer h4 { color: white; margin-bottom: 10px; }
+        /* --- ADICIONE ISSO NO FINAL DO SEU CSS PARA MELHORAR O MOBILE --- */
+    
+    @media (max-width: 768px) {
+        /* O cabeçalho fica em coluna (Logo em cima, menu embaixo) */
+        .header-inner { 
+            flex-direction: column; 
+            text-align: center; 
+        }
+        
+        nav ul { 
+            margin-top: 15px; 
+            padding: 0; 
+            justify-content: center; 
+            flex-wrap: wrap; /* Se não couber, quebra linha */
+        }
+        
+        /* O banner diminui para não ocupar a tela toda do celular */
+        .hero-vlog { 
+            height: 50vh; 
+            padding: 40px 10px;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem; /* Letra menor no celular */
+        }
+
+        /* Botão fica largura total para facilitar o clique com o polegar */
+        .play-btn {
+            display: block;
+            width: 100%;
+            margin: 10px auto;
+        }
+        
+        /* Aumenta a letra do texto para leitura fácil */
+        .article-body p {
+            font-size: 1rem;
+        }
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="news-ticker">
+    <div class="ticker-content">
+        📢 AVISO: Coletas de sangue todas as Terças e Quartas às 07:00h da manhã (Jejum Obrigatório) — Agende sua consulta com Dr. Gerlan Gurgel pelo WhatsApp — Novos equipamentos na Academia!
+    </div>
+</div>
+
+<header>
+    <div class="header-inner">
+        <div class="logo-area">
+            <h1>Instituto <span>Dr. Gerlan Gurgel</span></h1>
+            <small>Saúde Integrada & Performance</small>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#odontologia">Odontologia</a></li>
+                <li><a href="#medicina">Médicos</a></li>
+                <li><a href="#academia">Academia</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-vlog">
+    <div class="hero-content">
+        <h2>TUDO EM UM SÓ LUGAR</h2>
+        <p>Saúde bucal, corpo médico de elite e academia de alta performance.</p>
+    </div>
+</section>
+
+<div class="main-container">
+    
+    <div class="content-col">
+        <h2 class="section-title">Últimas do Instituto</h2>
+
+        <article class="article-card" id="odontologia">
+            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80');">
+                <span class="category-tag">Odontologia</span>
+            </div>
+            <div class="article-body">
+                <h3>Sorrisos que Transformam Vidas</h3>
+                <p>O Dr. Gerlan Gurgel lidera nossa equipe odontológica com tratamentos de ponta. Desde implantes complexos até a estética dental que você sempre sonhou. Possuímos laboratório de prótese próprio, o que reduz o tempo do seu tratamento pela metade.</p>
+                <a href="https://wa.me/5597981132190" class="read-more">Agendar Avaliação →</a>
+            </div>
+        </article>
+
+        <article class="article-card" id="academia">
+            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80');">
+                <span class="category-tag">Academia & Performance</span>
+            </div>
+            <div class="article-body">
+                <h3>Musculação: Força e Saúde no Mesmo Lugar</h3>
+                <p>Não somos apenas uma clínica, somos um centro de bem-estar. Nossa academia conta com equipamentos modernos para musculação e reabilitação física. O ambiente perfeito para quem busca o corpo dos sonhos com acompanhamento profissional.</p>
+                <a href="https://wa.me/5597981625173" class="read-more">Ver Planos da Academia →</a>
+            </div>
+        </article>
+
+        <article class="article-card" id="biomedicina">
+            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80');">
+                <span class="category-tag">Laboratório</span>
+            </div>
+            <div class="article-body">
+                <h3>Biomedicina e Exames Laboratoriais</h3>
+                <p>Precisão e rapidez. Realize seus exames de sangue e check-ups rotineiros aqui mesmo. Nossos dias de coleta são otimizados para garantir que você não perca tempo.</p>
+                <div class="horario-box">
+                    <strong>⏰ HORÁRIO DE COLETA:</strong><br>
+                    Terças e Quartas-feiras | 07:00h da Manhã
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <aside class="sidebar-col">
+        
+        <div class="sidebar-widget" style="text-align: center;">
+            <div class="profile-pic" style="background-image: url('placeholder-dr.jpg'); background-size: cover;"></div> <h3>Dr. Gerlan Gurgel</h3>
+            <p style="font-size: 0.9rem; color: #666;">Responsável Técnico</p>
+            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
+            <p style="font-size: 0.85rem;">"Minha missão é oferecer saúde integral. Do sorriso ao corpo, cuidamos de você por completo no Bairro Nova Esperança."</p>
+        </div>
+
+        <div class="sidebar-widget" id="contato">
+            <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Fale Conosco</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 5px;">📍 <strong>Endereço:</strong><br>Rua João Conrado, Bairro Nova Esperança</p>
+            <br>
+            <p style="font-size: 0.9rem;">📞 <strong>Telefones:</strong></p>
+            <ul style="list-style: none; padding-left: 0; font-size: 0.9rem;">
+                <li>(97) 98113-2190</li>
+                <li>(97) 98162-5173</li>
+            </ul>
+            
+            <a href="https://wa.me/5597981132190" class="contact-btn">📱 WhatsApp Clínica</a>
+            <a href="https://wa.me/5597981625173" class="contact-btn" style="background: #128c7e;">🏋️ WhatsApp Academia</a>
+        </div>
+
+        <div class="sidebar-widget">
+            <h3>Siga no Instagram</h3>
+            <p><a href="https://instagram.com/Institudo_dr_gerlan_gurgel" style="color: var(--verde-logo); text-decoration: none; font-weight: bold;">@Institudo_dr_gerlan_gurgel</a></p>
+            <p style="font-size: 0.8rem; color: #888;">Postamos dicas de saúde e fotos da academia diariamente!</p>
+        </div>
+
+    </aside>
+
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h4>INSTITUTO DR. GERLAN GURGEL</h4>
+        <p>Tudo em um só lugar. Excelência em Odontologia, Medicina e Fitness.</p>
+        <br>
+        <p style="font-size: 0.8rem;">&copy; 2026 - Desenvolvido para transformar vidas.</p>
+    </div>
+</footer>
+
+</body>
+</html>
