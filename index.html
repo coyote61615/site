@@ -17,12 +17,12 @@
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
         body { font-family: 'Open Sans', sans-serif; background-color: var(--cinza-fundo); color: var(--grafite); }
         
-        /* BARRA DE AVISOS (TICKER) */
+        /* TICKER */
         .news-ticker { background: var(--grafite); color: white; padding: 10px; overflow: hidden; white-space: nowrap; }
         .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; font-weight: bold; font-size: 14px; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 
-        /* HEADER ESTILO PORTAL */
+        /* HEADER */
         header { background: var(--branco); border-bottom: 4px solid var(--verde-logo); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .header-inner { max-width: 1200px; margin: auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-area h1 { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--grafite); font-size: 1.8rem; line-height: 1; }
@@ -32,18 +32,50 @@
         nav a { text-decoration: none; color: var(--grafite); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: var(--verde-logo); }
 
+        /* ESTILO PARA VÍDEOS DE FUNDO */
+        .video-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            background: #333; /* Fundo enquanto carrega */
+        }
+        
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
         /* HERO / DESTAQUE PRINCIPAL */
         .hero-vlog {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop');
-            background-size: cover; background-position: center; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px;
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            overflow: hidden;
         }
+        /* Filtro escuro em cima do vídeo do banner para ler o texto */
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; }
         .hero-content h2 { font-family: 'Oswald', sans-serif; font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        
         .play-btn { background: var(--verde-logo); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; display: inline-block; margin-top: 20px; }
         .play-btn:hover { background: var(--verde-escuro); transform: scale(1.05); }
 
-        /* LAYOUT DE CONTEÚDO (GRID) */
+        /* LAYOUT (GRID) */
         .main-container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; padding: 0 20px; }
-        
         @media(max-width: 768px) { .main-container { grid-template-columns: 1fr; } }
 
         /* POSTS / ARTIGOS */
@@ -51,62 +83,43 @@
         
         .article-card { background: var(--branco); border-radius: 8px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.3s; }
         .article-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .article-img { height: 250px; background-color: #ddd; background-size: cover; background-position: center; position: relative; }
-        .category-tag { position: absolute; top: 15px; left: 15px; background: var(--verde-logo); color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        
+        /* Container do vídeo no card */
+        .card-video-box {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .category-tag { position: absolute; top: 15px; left: 15px; background: var(--verde-logo); color: white; padding: 5px 10px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; z-index: 2; }
         
         .article-body { padding: 25px; }
         .article-body h3 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--grafite); }
         .article-body p { color: #666; line-height: 1.6; margin-bottom: 15px; }
         .read-more { color: var(--verde-logo); font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 0.9rem; }
 
-        /* SIDEBAR / LATERAL */
+        /* SIDEBAR */
         .sidebar-widget { background: var(--branco); padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .profile-pic { width: 100px; height: 100px; background: #ccc; border-radius: 50%; margin: 0 auto 15px; display: block; border: 3px solid var(--verde-logo); }
+        
+        /* Foto de perfil continua sendo imagem estática */
+        .profile-pic { width: 100px; height: 100px; background: #ccc; border-radius: 50%; margin: 0 auto 15px; display: block; border: 3px solid var(--verde-logo); object-fit: cover; }
+        
         .horario-box { background: #f9f9f9; border: 1px dashed var(--grafite); padding: 15px; margin-top: 15px; }
         .contact-btn { display: block; width: 100%; padding: 12px; background: #25d366; color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 10px; }
 
-        /* FOOTER */
         footer { background: var(--grafite); color: #aaa; padding: 40px 20px; text-align: center; margin-top: 50px; }
         footer h4 { color: white; margin-bottom: 10px; }
-        /* --- ADICIONE ISSO NO FINAL DO SEU CSS PARA MELHORAR O MOBILE --- */
-    
-    @media (max-width: 768px) {
-        /* O cabeçalho fica em coluna (Logo em cima, menu embaixo) */
-        .header-inner { 
-            flex-direction: column; 
-            text-align: center; 
-        }
-        
-        nav ul { 
-            margin-top: 15px; 
-            padding: 0; 
-            justify-content: center; 
-            flex-wrap: wrap; /* Se não couber, quebra linha */
-        }
-        
-        /* O banner diminui para não ocupar a tela toda do celular */
-        .hero-vlog { 
-            height: 50vh; 
-            padding: 40px 10px;
-        }
 
-        .hero-content h2 {
-            font-size: 2rem; /* Letra menor no celular */
+        /* MEDIA QUERIES (CELULAR) */
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; text-align: center; }
+            nav ul { margin-top: 15px; padding: 0; justify-content: center; flex-wrap: wrap; }
+            .hero-vlog { height: 50vh; padding: 40px 10px; }
+            .hero-content h2 { font-size: 2rem; }
+            .play-btn { display: block; width: 100%; margin: 10px auto; }
+            .article-body p { font-size: 1rem; }
         }
-
-        /* Botão fica largura total para facilitar o clique com o polegar */
-        .play-btn {
-            display: block;
-            width: 100%;
-            margin: 10px auto;
-        }
-        
-        /* Aumenta a letra do texto para leitura fácil */
-        .article-body p {
-            font-size: 1rem;
-        }
-    }
-
     </style>
 </head>
 <body>
@@ -135,30 +148,64 @@
 </header>
 
 <section class="hero-vlog">
+    <section class="hero-vlog" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('logo1.png'); background-size: cover; background-position: center;">
     <div class="hero-content">
         <h2>TUDO EM UM SÓ LUGAR</h2>
         <p>Saúde bucal, corpo médico de elite e academia de alta performance.</p>
     </div>
+</section>
 </section>
 
 <div class="main-container">
     
     <div class="content-col">
         <h2 class="section-title">Últimas do Instituto</h2>
-
+        <article class="article-card" id="implantes">
+            <div class="card-video-box">
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video-implantes.mp4" type="video/mp4">
+                </video>
+                <span class="category-tag">Implantodontia Especializada</span>
+            </div>
+            <div class="article-body">
+                <h3>Implantes: Recupere sua Autoestima</h3>
+                <p>A solução definitiva para dentes perdidos. Tecnologia de ponta com pinos de titânio que garantem segurança, conforto e uma estética idêntica aos dentes naturais. Volte a sorrir sem medo.</p>
+                <a href="https://wa.me/5597981132190" class="read-more">Avaliar Implantes →</a>
+            </div>
+        </article>
+                    <!-- div nova -->
+             <article class="article-card" id="protese ">
+            <div class="card-video-box">
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video-protese.mp4" type="video/mp4">
+                </video>
+                <span class="category-tag">protese</span>
+            </div>
+            <div class="article-body">
+                <h3>Protese dentaria: recupere sua autoestima.</h3>
+                <p>A solução para você voltar a sorrir.</p>
+                <p>Venha conferir todos os modelos de proteses que temos para você sair de sorriso novo.</p>
+            </div>
+        </article>        
         <article class="article-card" id="odontologia">
-            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80');">
+            <div class="card-video-box">
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video-odonto.mp4" type="video/mp4">
+                </video>
                 <span class="category-tag">Odontologia</span>
             </div>
             <div class="article-body">
-                <h3>Sorrisos que Transformam Vidas</h3>
+                <h3>Sorrisos que Transformam Vidas.</h3>
                 <p>O Dr. Gerlan Gurgel lidera nossa equipe odontológica com tratamentos de ponta. Desde implantes complexos até a estética dental que você sempre sonhou. Possuímos laboratório de prótese próprio, o que reduz o tempo do seu tratamento pela metade.</p>
                 <a href="https://wa.me/5597981132190" class="read-more">Agendar Avaliação →</a>
             </div>
         </article>
 
         <article class="article-card" id="academia">
-            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80');">
+            <div class="card-video-box">
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video-academia1.mp4" type="video/mp4">
+                </video>
                 <span class="category-tag">Academia & Performance</span>
             </div>
             <div class="article-body">
@@ -169,7 +216,10 @@
         </article>
 
         <article class="article-card" id="biomedicina">
-            <div class="article-img" style="background-image: url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80');">
+            <div class="card-video-box">
+                <video autoplay muted loop playsinline class="video-bg">
+                    <source src="video-bio.mp4" type="video/mp4">
+                </video>
                 <span class="category-tag">Laboratório</span>
             </div>
             <div class="article-body">
@@ -187,18 +237,20 @@
     <aside class="sidebar-col">
         
         <div class="sidebar-widget" style="text-align: center;">
-            <div class="profile-pic" style="background-image: url('placeholder-dr.jpg'); background-size: cover;"></div> <h3>Dr. Gerlan Gurgel</h3>
+            <img src="placeholder-dr.jpg" class="profile-pic" alt="Dr Gerlan"> 
+            <h3>Dr. Gerlan Gurgel</h3>
             <p style="font-size: 0.9rem; color: #666;">Odontologia CRM XXXX</p>
             <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
             <p style="font-size: 0.85rem;">Minha missão é transformar seu sorriso</p>
         </div>
 
          <div class="sidebar-widget" style="text-align: center;">
-            <div class="profile-pic" style="background-image: url('placeholder-dr.jpg'); background-size: cover;"></div> <h3>Bruna Barbosa</h3>
-            <p style="font-size: 0.9rem; color: #666;">Biomedica</p>
+            <img src="placeholder-bruna.jpg" class="profile-pic" alt="Dra Bruna">
+            <h3>Bruna Barbosa</h3>
+            <p style="font-size: 0.9rem; color: #666;">Biomédica</p>
             <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
-            <p style="font-size: 0.85rem;">"Biomedicina por amor"</p>
-        </div
+            <p style="font-size: 0.85rem;">Biomedicina por amor</p>
+        </div>
 
         <div class="sidebar-widget" id="contato">
             <h3 style="font-size: 1.2rem; margin-bottom: 15px;">Fale Conosco</h3>
@@ -210,7 +262,7 @@
                 <li>(97) 98162-5173</li>
             </ul>
             
-            <a href="https://wa.me/5597981132190" class="contact-btn">📱 WhatsApp Clínica</a>
+            <a href="https://wa.me/5597981132190" class="contact-btn" style="background-color: #5e7059;">📱 WhatsApp Clínica</a>
             <a href="https://wa.me/5597981625173" class="contact-btn" style="background: #128c7e;">🏋️ WhatsApp Academia</a>
         </div>
 
@@ -220,9 +272,9 @@
             <p style="font-size: 0.8rem; color: #888;">Postamos dicas de saúde e fotos da academia diariamente!</p>
         </div>
         <div class="sidebar-widget">
-            <h3>Siga também o responsavel por esse espaço incrivel.</h3>
+            <h3>Siga também o responsável</h3>
             <p><a href="https://instagram.com/gerlangurgel" style="color: var(--verde-logo); text-decoration: none; font-weight: bold;">Gerlan Gurgel</a></p>
-            <p style="font-size: 0.8rem; color: #888;">Venha conhecer nosso espaço. Saúde em primeiro lugar sempre, pra isso conte conosco</p>
+            <p style="font-size: 0.8rem; color: #888;">Saúde em primeiro lugar sempre.</p>
         </div>
 
     </aside>
@@ -240,6 +292,3 @@
 
 </body>
 </html>
-
-
-
