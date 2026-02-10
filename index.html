@@ -16,7 +16,7 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
         body { font-family: 'Open Sans', sans-serif; background-color: var(--cinza-fundo); color: var(--grafite); }
-        
+ 
         /* TICKER */
         .news-ticker { background: var(--grafite); color: white; padding: 10px; overflow: hidden; white-space: nowrap; }
         .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; font-weight: bold; font-size: 14px; }
@@ -112,7 +112,7 @@
         footer h4 { color: white; margin-bottom: 10px; }
 
         /* MEDIA QUERIES (CELULAR) */
-       @media (max-width: 768px) {
+        @media (max-width: 768px) {
         /* Fixa o header mas deixa ele bem fininho */
         header {
             position: fixed;
@@ -158,10 +158,46 @@
         .hero-vlog { height: 45vh; padding: 20px 10px; }
         .hero-content h2 { font-size: 1.8rem; }
         .play-btn { width: 90%; padding: 12px; font-size: 1rem; }
-    }
+    
+        }
+    /* regra nova */
+    /* Estilo do Pop-up */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo bem escuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Fica na frente de tudo */
+    cursor: pointer;
+}
+
+.popup-content img {
+    max-width: 90%;
+    max-height: 90vh;
+    border: 3px solid var(--verde-logo);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Classe para esconder o popup */
+.hidden {
+    display: none !important;
+}
     </style>
 </head>
 <body>
+<!-- Novo codigo -->
+
+ <div id="popup-aviso" class="popup-overlay">
+    <div class="popup-content">
+        <img src="aviso.jpg" alt="Aviso Importante">
+    </div>
+</div>
 
 <div class="news-ticker">
     <div class="ticker-content">
@@ -199,6 +235,19 @@
     
     <div class="content-col">
         <h2 class="section-title">Últimas do Instituto</h2>
+        <!-- imagem 1 -->
+         <article class="article-card" id="implantes">
+            <div class="card-image-flexible" style="position: relative; width: 100%;">
+                <img src="aviso.jpg" alt="Implantes Dentários" style="width: 100%; height: auto; display: block;">
+                
+                <span class="category-tag">Medicos especializados</span>
+            </div>
+            <div class="article-body">
+                <h3>Endoscopia Digestiva Alta e Protocolo de Tratamento com Mounjaro</h3>
+                <p>Exames realizados com segurança e precisão para diagnóstico precoce de doenças gastrointestinais, aliados a protocolos médicos individualizados para tratamento e acompanhamento clínico.</p>
+                <a href="https://wa.me/5597981132190" class="read-more">Agende seu atendimento </a>
+            </div>
+        </article>
         <article class="article-card" id="implantes">
             <div class="card-video-box">
                 <video autoplay muted loop playsinline class="video-bg">
@@ -328,7 +377,19 @@
         <p style="font-size: 0.8rem;">&copy; 2026 - desenvolvido por Elijunio_0 & IA</p>
     </div>
 </footer>
+<script>
+    const popup = document.getElementById('popup-aviso');
 
+    // Função para fechar o popup
+    function fecharPopup() {
+        popup.classList.add('hidden');
+    }
+
+    // Fecha se clicar em qualquer lugar da tela
+    popup.addEventListener('click', fecharPopup);
+
+    // Fecha automaticamente após 4 segundos (4000 milissegundos)
+    setTimeout(fecharPopup, 4000);
+</script>
 </body>
 </html>
-
