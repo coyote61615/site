@@ -112,14 +112,53 @@
         footer h4 { color: white; margin-bottom: 10px; }
 
         /* MEDIA QUERIES (CELULAR) */
-        @media (max-width: 768px) {
-            .header-inner { flex-direction: column; text-align: center; }
-            nav ul { margin-top: 15px; padding: 0; justify-content: center; flex-wrap: wrap; }
-            .hero-vlog { height: 50vh; padding: 40px 10px; }
-            .hero-content h2 { font-size: 2rem; }
-            .play-btn { display: block; width: 100%; margin: 10px auto; }
-            .article-body p { font-size: 1rem; }
+       @media (max-width: 768px) {
+        /* Fixa o header mas deixa ele bem fininho */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 60px; /* Altura fixa e baixa para o celular */
+            display: flex;
+            align-items: center;
+            overflow: hidden;
         }
+
+        .header-inner {
+            padding: 5px 15px !important;
+            flex-direction: row !important; /* Mantém logo e menu na mesma linha */
+            justify-content: center; /* Centraliza o nome */
+            width: 100%;
+        }
+
+        /* Esconde o sub-título "Saúde Integrada" no celular para ganhar espaço */
+        .logo-area small {
+            display: none;
+        }
+
+        /* Diminui o tamanho da fonte do nome principal */
+        .logo-area h1 {
+            font-size: 1.2rem !important;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Esconde a lista de menu no topo para não embolar */
+        /* O usuário pode navegar clicando nas âncoras ou você pode criar um menu lateral depois */
+        nav {
+            display: none; 
+        }
+
+        /* Ajuste para o conteúdo não ficar escondido atrás do header fixo */
+        body {
+            padding-top: 60px; 
+        }
+
+        /* Ajustes de banner e botões que já tínhamos */
+        .hero-vlog { height: 45vh; padding: 20px 10px; }
+        .hero-content h2 { font-size: 1.8rem; }
+        .play-btn { width: 90%; padding: 12px; font-size: 1rem; }
+    }
     </style>
 </head>
 <body>
@@ -292,3 +331,4 @@
 
 </body>
 </html>
+
